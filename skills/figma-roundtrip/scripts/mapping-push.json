@@ -1,0 +1,64 @@
+{
+  "_description": "CSS → Figma property mapping. Every entry is a deterministic lookup — no AI reasoning required.",
+
+  "layout": [
+    { "css": "display: flex", "figma": "frame.layoutMode = 'HORIZONTAL'", "notes": "Default horizontal; check flex-direction" },
+    { "css": "flex-direction: column", "figma": "frame.layoutMode = 'VERTICAL'" },
+    { "css": "flex-direction: row", "figma": "frame.layoutMode = 'HORIZONTAL'" },
+    { "css": "gap: Npx", "figma": "frame.itemSpacing = N" },
+    { "css": "row-gap: Npx", "figma": "frame.itemSpacing = N", "notes": "Only when layoutMode is VERTICAL" },
+    { "css": "column-gap: Npx", "figma": "frame.itemSpacing = N", "notes": "Only when layoutMode is HORIZONTAL" },
+    { "css": "padding: Tpx Rpx Bpx Lpx", "figma": "frame.paddingTop = T; paddingRight = R; paddingBottom = B; paddingLeft = L", "notes": "Decompose shorthand first" },
+    { "css": "padding: Npx", "figma": "All four padding properties = N" },
+    { "css": "align-items: center", "figma": "frame.counterAxisAlignItems = 'CENTER'" },
+    { "css": "align-items: flex-start", "figma": "frame.counterAxisAlignItems = 'MIN'" },
+    { "css": "align-items: flex-end", "figma": "frame.counterAxisAlignItems = 'MAX'" },
+    { "css": "align-items: stretch", "figma": "frame.counterAxisAlignItems = 'STRETCH'" },
+    { "css": "justify-content: flex-start", "figma": "frame.primaryAxisAlignItems = 'MIN'" },
+    { "css": "justify-content: center", "figma": "frame.primaryAxisAlignItems = 'CENTER'" },
+    { "css": "justify-content: flex-end", "figma": "frame.primaryAxisAlignItems = 'MAX'" },
+    { "css": "justify-content: space-between", "figma": "frame.primaryAxisAlignItems = 'SPACE_BETWEEN'" }
+  ],
+
+  "sizing": [
+    { "css": "width: Npx (fixed)", "figma": "node.resize(N, node.height); node.layoutSizingHorizontal = 'FIXED'" },
+    { "css": "height: Npx (fixed)", "figma": "node.resize(node.width, N); node.layoutSizingVertical = 'FIXED'" },
+    { "css": "width: auto / hug", "figma": "node.layoutSizingHorizontal = 'HUG'", "precondition": "Node must be auto-layout frame or text" },
+    { "css": "height: auto / hug", "figma": "node.layoutSizingVertical = 'HUG'", "precondition": "Node must be auto-layout frame or text" },
+    { "css": "flex: 1 / width: 100%", "figma": "node.layoutSizingHorizontal = 'FILL'", "precondition": "Must be child of auto-layout; append first" },
+    { "css": "flex-grow: 1 (vertical fill)", "figma": "node.layoutSizingVertical = 'FILL'", "precondition": "Must be child of auto-layout; append first" },
+    { "css": "min-width: Npx", "figma": "node.minWidth = N", "precondition": "Auto-layout child only" },
+    { "css": "max-width: Npx", "figma": "node.maxWidth = N", "precondition": "Auto-layout child only" }
+  ],
+
+  "visual": [
+    { "css": "background: #RRGGBB", "figma": "node.fills = [{ type: 'SOLID', color: { r: R/255, g: G/255, b: B/255 } }]", "notes": "Colors are 0–1 range" },
+    { "css": "background: transparent / none", "figma": "node.fills = []" },
+    { "css": "border: Wpx solid #RRGGBB", "figma": "node.strokes = [{ type: 'SOLID', color: {...} }]; node.strokeWeight = W", "notes": "Clone array, reassign" },
+    { "css": "border-radius: Npx", "figma": "node.cornerRadius = N" },
+    { "css": "border-radius: T R B L (individual)", "figma": "node.topLeftRadius = T; topRightRadius = R; bottomRightRadius = B; bottomLeftRadius = L" },
+    { "css": "opacity: N", "figma": "node.opacity = N", "notes": "CSS 0–1 matches Figma 0–1" },
+    { "css": "overflow: hidden", "figma": "node.clipsContent = true" },
+    { "css": "overflow: visible", "figma": "node.clipsContent = false" },
+    { "css": "border-top / border-bottom only", "figma": "node.strokesIncludedInLayout = true; node.strokes = [...]; node.strokeTopWeight = W (etc.)", "notes": "Individual side strokes" }
+  ],
+
+  "text": [
+    { "css": "font-family: 'Name'", "figma": "textNode.fontName = { family: 'Name', style: 'Regular' }", "notes": "Must loadFontAsync first" },
+    { "css": "font-size: Npx", "figma": "textNode.fontSize = N" },
+    { "css": "font-weight: 300", "figma": "fontName.style = 'Light'" },
+    { "css": "font-weight: 400", "figma": "fontName.style = 'Regular'" },
+    { "css": "font-weight: 500", "figma": "fontName.style = 'Medium'" },
+    { "css": "font-weight: 600", "figma": "fontName.style = 'SemiBold'" },
+    { "css": "font-weight: 700", "figma": "fontName.style = 'Bold'" },
+    { "css": "color: #RRGGBB", "figma": "textNode.fills = [{ type: 'SOLID', color: {...} }]", "notes": "Same color conversion as background" },
+    { "css": "text-align: right", "figma": "textNode.textAlignHorizontal = 'RIGHT'" },
+    { "css": "text-align: center", "figma": "textNode.textAlignHorizontal = 'CENTER'" },
+    { "css": "text-align: left", "figma": "textNode.textAlignHorizontal = 'LEFT'" },
+    { "css": "line-height: Npx", "figma": "textNode.lineHeight = { value: N, unit: 'PIXELS' }" },
+    { "css": "line-height: N (unitless)", "figma": "textNode.lineHeight = { value: N * 100, unit: 'PERCENT' }", "notes": "Multiply by 100 for percent" },
+    { "css": "letter-spacing: Npx", "figma": "textNode.letterSpacing = { value: N, unit: 'PIXELS' }" },
+    { "css": "text-transform: uppercase", "figma": "Apply .toUpperCase() to the characters string", "notes": "No Figma equivalent — transform the text content" },
+    { "css": "direction: rtl", "figma": "textNode.textAlignHorizontal = 'RIGHT'", "notes": "RTL is a layout concern, not a text property in Figma" }
+  ]
+}

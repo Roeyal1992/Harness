@@ -1,0 +1,67 @@
+{
+  "_description": "Figma → CSS property mapping (reverse of mapping-push.json). Every entry is a deterministic lookup — no AI reasoning required.",
+
+  "layout": [
+    { "figma": "layoutMode = 'HORIZONTAL'", "css": "display: flex; flex-direction: row" },
+    { "figma": "layoutMode = 'VERTICAL'", "css": "display: flex; flex-direction: column" },
+    { "figma": "itemSpacing = N", "css": "gap: Npx" },
+    { "figma": "paddingTop/Right/Bottom/Left", "css": "padding: Tpx Rpx Bpx Lpx", "notes": "Collapse to shorthand when all equal" },
+    { "figma": "counterAxisAlignItems = 'CENTER'", "css": "align-items: center" },
+    { "figma": "counterAxisAlignItems = 'MIN'", "css": "align-items: flex-start" },
+    { "figma": "counterAxisAlignItems = 'MAX'", "css": "align-items: flex-end" },
+    { "figma": "counterAxisAlignItems = 'STRETCH'", "css": "align-items: stretch" },
+    { "figma": "primaryAxisAlignItems = 'MIN'", "css": "justify-content: flex-start" },
+    { "figma": "primaryAxisAlignItems = 'CENTER'", "css": "justify-content: center" },
+    { "figma": "primaryAxisAlignItems = 'MAX'", "css": "justify-content: flex-end" },
+    { "figma": "primaryAxisAlignItems = 'SPACE_BETWEEN'", "css": "justify-content: space-between" },
+    { "figma": "No layoutMode (Group/Frame)", "css": "position: relative (parent); position: absolute; left: Xpx; top: Ypx (children)", "notes": "Do not infer flex from spatial arrangement" }
+  ],
+
+  "sizing": [
+    { "figma": "layoutSizingHorizontal = 'FIXED' + width = N", "css": "width: Npx" },
+    { "figma": "layoutSizingVertical = 'FIXED' + height = N", "css": "height: Npx" },
+    { "figma": "layoutSizingHorizontal = 'HUG'", "css": "width: auto", "notes": "Omit if natural sizing suffices" },
+    { "figma": "layoutSizingVertical = 'HUG'", "css": "height: auto" },
+    { "figma": "layoutSizingHorizontal = 'FILL'", "css": "flex: 1 or width: 100%", "notes": "Context-dependent" },
+    { "figma": "layoutSizingVertical = 'FILL'", "css": "flex-grow: 1 or height: 100%", "notes": "Context-dependent" },
+    { "figma": "minWidth = N", "css": "min-width: Npx" },
+    { "figma": "maxWidth = N", "css": "max-width: Npx" },
+    { "figma": "No layoutSizing* (non-auto-layout)", "css": "width: Npx; height: Npx", "notes": "Read from node.width / node.height" }
+  ],
+
+  "visual": [
+    { "figma": "fills = [{ type: 'SOLID', color: {r,g,b} }]", "css": "background: #RRGGBB", "notes": "Convert 0–1 → 0–255, then hex" },
+    { "figma": "fills = []", "css": "background: transparent" },
+    { "figma": "strokes = [{ type: 'SOLID', color: {...} }]; strokeWeight = W", "css": "border: Wpx solid #RRGGBB" },
+    { "figma": "cornerRadius = N", "css": "border-radius: Npx" },
+    { "figma": "Individual corner radii", "css": "border-radius: TL TR BR BL" },
+    { "figma": "opacity = N", "css": "opacity: N" },
+    { "figma": "clipsContent = true", "css": "overflow: hidden" },
+    { "figma": "clipsContent = false", "css": "(default)", "notes": "Omit unless explicitly needed" },
+    { "figma": "strokeTopWeight / per-side", "css": "border-top: Wpx solid #color" }
+  ],
+
+  "text": [
+    { "figma": "fontName = { family, style }", "css": "font-family: 'family'; font-weight: N", "notes": "Map style name → weight number" },
+    { "figma": "fontSize = N", "css": "font-size: Npx" },
+    { "figma": "fills = [{ color }]", "css": "color: #RRGGBB" },
+    { "figma": "textAlignHorizontal = 'RIGHT'", "css": "text-align: right" },
+    { "figma": "textAlignHorizontal = 'CENTER'", "css": "text-align: center" },
+    { "figma": "textAlignHorizontal = 'LEFT'", "css": "text-align: left" },
+    { "figma": "lineHeight = { value, unit: 'PIXELS' }", "css": "line-height: Vpx" },
+    { "figma": "lineHeight = { value, unit: 'PERCENT' }", "css": "line-height: V/100 (unitless)", "notes": "Divide by 100" },
+    { "figma": "letterSpacing = { value, unit: 'PIXELS' }", "css": "letter-spacing: Vpx" }
+  ],
+
+  "fontWeightMap": {
+    "Thin": 100,
+    "ExtraLight": 200,
+    "Light": 300,
+    "Regular": 400,
+    "Medium": 500,
+    "SemiBold": 600,
+    "Bold": 700,
+    "ExtraBold": 800,
+    "Black": 900
+  }
+}
