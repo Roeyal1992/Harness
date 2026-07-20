@@ -96,7 +96,12 @@
       "Bash(curl -L -k -o \"C:/Users/ROALFA~1/AppData/Local/Temp/claude/c--Users-roalfassi-OneDrive---Deloitte--O365D--Studio-Harness/e968293b-8174-45fa-a525-1fb7c460e1c3/scratchpad/popover-slds.png\" \"https://www.figma.com/api/mcp/asset/057f0d5b-a42d-43b2-b484-c16ba9beb2eb\")",
       "Bash(curl -L -k -o \"C:/Users/ROALFA~1/AppData/Local/Temp/claude/c--Users-roalfassi-OneDrive---Deloitte--O365D--Studio-Harness/e968293b-8174-45fa-a525-1fb7c460e1c3/scratchpad/popover-slds-v2.png\" \"https://www.figma.com/api/mcp/asset/15c9ed78-f291-4ee3-8b2f-6ebd700c4734\")",
       "Bash(curl -L -k -o \"C:/Users/ROALFA~1/AppData/Local/Temp/claude/c--Users-roalfassi-OneDrive---Deloitte--O365D--Studio-Harness/e968293b-8174-45fa-a525-1fb7c460e1c3/scratchpad/user-iteration.png\" \"https://www.figma.com/api/mcp/asset/b051a890-f7f1-4124-b663-8925d921245f\")",
-      "mcp__claude_ai_Figma__get_figma_skill"
+      "mcp__claude_ai_Figma__get_figma_skill",
+      "PowerShell(npm list -g figma-developer-mcp 2>$null)",
+      "PowerShell(npx figma-developer-mcp --version 2>&1)",
+      "PowerShell(npm install -g figma-developer-mcp)",
+      "PowerShell(npm list -g figma-developer-mcp)",
+      "PowerShell(\\(Get-Command figma-developer-mcp -ErrorAction SilentlyContinue\\).Source; npm root -g)"
     ],
     "additionalDirectories": [
       "c:\\Users\\roalfassi\\OneDrive - Deloitte (O365D)\\Studio\\Projects\\Knowledge share",

@@ -11,12 +11,7 @@ This document defines the build structure, artifact contracts, lifecycle mechani
 
 The Harness is a governing instrument for AI-assisted project work. When applied to a host project, it deposits a `.harness/` knowledge cartridge containing the active project memory, product intent, and build mechanics. `HARNESS.md` lives at the project root as the governing protocol.
 
-The canonical artifact package is:
-
-- `HARNESS.md` — at the project root
-- `.harness/01_PROJECT.md`
-- `.harness/02_PRD.md`
-- `.harness/03_BUILD.md`
+The cartridge always contains `01_PROJECT.md` as its session anchor. A `README.md` is recommended as an index of whatever else the cartridge holds. Everything beyond that is composed by the operator from available templates or created as the project requires.
 
 ---
 
@@ -52,29 +47,43 @@ The MVP does not require automated linting, schema validation, source-control ho
 
 ---
 
-# 4. Canonical File Map
+# 4. Cartridge Structure
 
-| File | Location | Type | Primary Role |
-|---|---|---|---|
-| `HARNESS.md` | Project root | Protocol artifact | Governing protocol — the document an AI reads first when entering any Harness-governed project |
-| `01_PROJECT.md` | `.harness/` | State artifact | Active project memory and restart context |
-| `02_PRD.md` | `.harness/` | Product artifact | Stable product intent |
-| `03_BUILD.md` | `.harness/` | Build artifact | Stable technical and build truth |
+## 4.1 Required file
 
-## 4.1 Deployment topology
+| File | Location | Role |
+|---|---|---|
+| `HARNESS.md` | Project root | Governing protocol — read first on every session |
+| `01_PROJECT.md` | `.harness/` | Session anchor — active memory, current state, restart context |
+
+`01_PROJECT.md` is the only enforced file in the cartridge. It is the one file a future session can always count on being present.
+
+## 4.2 Recommended file
+
+| File | Location | Role |
+|---|---|---|
+| `README.md` | `.harness/` | Cartridge index — what else is in this directory and what each file does |
+
+`README.md` makes the cartridge navigable regardless of its shape. When the cartridge contains more than `01_PROJECT.md`, a README should be present. It does not duplicate `01_PROJECT.md` — it indexes everything else.
+
+## 4.3 Flexible content
+
+Everything beyond `01_PROJECT.md` and `README.md` is composed by the operator. The Harness provides templates as starting points — not requirements. A project may use one additional file or ten, structured however serves the work.
+
+Available templates are documented in `skills/deploy.md` and `skills/adopt.md`.
+
+## 4.4 Deployment topology
 
 When the Harness is applied to a host project:
 
 - `HARNESS.md` is placed at the host project root — the governing protocol the AI reads first
-- `01_PROJECT.md`, `02_PRD.md`, and `03_BUILD.md` are placed inside a `.harness/` directory
+- The `.harness/` directory is deposited at the project root as the knowledge cartridge
 
-The `.harness/` directory is the project's knowledge cartridge — a self-contained context deposit that captures evolving project state without cluttering the project root. The separation reflects the distinct roles of the protocol layer (reusable, root-level) and the project artifacts (project-specific, contained).
+The `.harness/` directory is a self-contained context deposit — a container the AI reads to understand the project. Its shape varies by project; its navigability is guaranteed by `01_PROJECT.md` and `README.md`.
 
-## 4.2 Self-hosted instance
+## 4.5 Self-hosted instance
 
-This repo is itself a governed instance of the Harness. The `.harness/` directory here contains the evolving context for the Harness's own development, governed by the same instrument it defines. This is the canonical demonstration of the deployment model.
-
-Additional artifacts may be added to `.harness/` only when project complexity justifies them.
+This repo is itself a governed instance of the Harness. The `.harness/` directory here contains the evolving context for the Harness's own development. This is the canonical demonstration of the deployment model.
 
 ---
 
@@ -90,19 +99,17 @@ Must not include project-specific scope, current project status, or unresolved p
 
 Must define current project continuity: project snapshot, artifact map, current path forward, active work, recent trail, open decisions, promotion queue, do-not-resurrect notes, and restart protocol.
 
-Must not become a duplicate PRD, Build Spec, or Instructions file, or a permanent source for stable decisions.
+Must not become a duplicate of any other file, or a permanent source for stable decisions.
 
-## 5.3 `.harness/02_PRD.md`
+## 5.3 `.harness/README.md`
 
-Must define stable product intent: product summary, governing instrument framing, problem statement, target users, user needs, goals, MVP scope, non-goals, functional requirements, core workflows, success criteria, risks, assumptions, and future expansion areas.
+Must index the contents of the cartridge: one line per file, describing what it holds and why it exists. Does not duplicate `01_PROJECT.md`. Updated whenever a file is added or removed from the cartridge.
 
-Must not include detailed implementation mechanics, file-by-file build behavior, or current project status.
+Must not hold project content — it is navigation only.
 
-## 5.4 `.harness/03_BUILD.md`
+## 5.4 Additional cartridge files
 
-Must define stable build mechanics: canonical file map with deployment topology, artifact contracts, authority rules, lifecycle model, update mechanics, editing discipline, changelog mechanics, optional artifact policy, validation rules, migration mechanics, restart mechanics, drift handling, and acceptance gates.
-
-Must not include current project state, product-value narrative, or unresolved project decisions.
+Responsibility contracts for additional files are defined within each file's own Document Governance section. The operator decides what files the project needs; this Build Spec does not prescribe them beyond the enforced and recommended files above.
 
 ---
 
@@ -128,19 +135,18 @@ Keep local governance specific to the artifact. Do not copy the full global mode
 
 1. `HARNESS.md` (project root)
 2. `.harness/01_PROJECT.md`
-3. `.harness/02_PRD.md`
-4. `.harness/03_BUILD.md`
+3. `.harness/README.md` (if present — to understand cartridge shape and what else to read)
+4. Additional cartridge files as indicated by README or current task
 
-`.harness/01_PROJECT.md` appears early because it orients the session. It does not outrank product or build artifacts for durable truth.
+`.harness/01_PROJECT.md` appears early because it orients the session. `README.md` follows immediately so the AI understands the full shape of the cartridge before proceeding.
 
 ## 7.2 Authority by topic
 
-| Topic | Authority order |
+| Topic | Authority |
 |---|---|
-| Reusable collaboration protocol | `HARNESS.md` → `.harness/01_PROJECT.md` |
-| Current project state | `.harness/01_PROJECT.md` → `.harness/02_PRD.md` → `.harness/03_BUILD.md` |
-| Product intent | `.harness/02_PRD.md` → `.harness/01_PROJECT.md` → `.harness/03_BUILD.md` |
-| Build and technical truth | `.harness/03_BUILD.md` → `.harness/02_PRD.md` → `.harness/01_PROJECT.md` |
+| Reusable collaboration protocol | `HARNESS.md` |
+| Current project state | `.harness/01_PROJECT.md` |
+| Topic-specific durable truth | The file whose Document Governance section claims that topic |
 
 Direct operator instruction outranks all artifacts for the current task.
 
@@ -237,33 +243,35 @@ When a trail entry is useful, capture: date or session marker, artifact changed,
 
 ---
 
-# 13. Optional Artifact Extension Policy
+# 13. Cartridge Composition
 
-The default artifact package has four files. Optional artifacts may be added only when they reduce complexity more than they add maintenance overhead.
+The cartridge is composed by the operator. `01_PROJECT.md` is the only required file. Everything else is added when the project warrants it.
 
-## 13.1 Optional execution artifact
+## 13.1 Composition principle
 
-Create `.harness/04_EXECUTION.md` only when implementation instructions are too large for `.harness/03_BUILD.md`, a builder needs a consolidated command artifact, or sequencing is strict. Do not create it merely because an older package had one.
+Add a file when it reduces complexity more than it adds maintenance overhead. The test: would the project be harder to navigate or resume without this file? If yes, add it. If no, keep the information in `01_PROJECT.md`.
 
-If created, it defers to: `HARNESS.md` for protocol, `.harness/01_PROJECT.md` for current state, `.harness/02_PRD.md` for product intent, `.harness/03_BUILD.md` for build truth.
+## 13.2 Available templates
 
-## 13.2 Optional decisions artifact
+The Harness provides templates as starting points. Templates are proposals — not requirements. Use them, adapt them, or ignore them.
 
-Create a decisions artifact only when decisions become too numerous or long-lived for `.harness/01_PROJECT.md`.
+Common templates:
+- `product.md` — stable product intent: purpose, users, scope, non-goals, success criteria
+- `project.md` — project-specific state beyond `01_PROJECT.md`: decisions log, open questions, constraints
+- `build.md` — technical and build mechanics for implementation-heavy projects
+- `protocol.md` — project-specific collaboration rules or domain conventions
 
-## 13.3 Optional test cases artifact
+Templates live in `skills/deploy.md` and `skills/adopt.md`.
 
-Create a test cases artifact only when validation scenarios become too detailed for `.harness/03_BUILD.md`.
+## 13.3 Update README when adding files
 
-## 13.4 Optional changelog artifact
+Every time a file is added to or removed from `.harness/`, update `README.md` to reflect the change. This keeps the cartridge navigable.
 
-Create a changelog artifact only when the threshold in Section 12 is met. Until then, use `.harness/01_PROJECT.md`.
+## 13.4 Optional skills directory
 
-## 13.5 Optional skills directory
+A `skills/` directory may be added at the project root to hold reusable AI procedures — named, documented playbooks the AI can invoke within the project context.
 
-A `skills/` directory may be added at the project root to hold reusable AI procedures — named, documented playbooks the AI can invoke within the project context, analogous to Claude Code's skills system.
-
-Create a `skills/` directory only when reusable procedures become complex enough to justify named invocations rather than inline instruction in `HARNESS.md` or `.harness/01_PROJECT.md`. If created, skills are stored as individual markdown files within `skills/` and referenced from `HARNESS.md`.
+Create a `skills/` directory only when reusable procedures become complex enough to justify named invocations rather than inline instruction. If created, skills are stored as individual markdown files within `skills/` and referenced from `HARNESS.md`.
 
 ---
 
@@ -271,13 +279,12 @@ Create a `skills/` directory only when reusable procedures become complex enough
 
 ## 14.1 Package-level validation
 
-The artifact package is valid when:
+The cartridge is valid when:
 
-- all four canonical artifacts exist at correct locations
-- each artifact has a clear role and local document governance
+- `01_PROJECT.md` exists and is current
+- `README.md` is present and accurately reflects the cartridge contents
+- each file has a clear role and Document Governance section
 - artifact responsibilities do not materially overlap
-- reading order and authority rules are clear
-- promotion and pruning mechanics are defined
 - current state is not confused with durable truth
 - no legacy artifact remains ambiguously authoritative
 
@@ -285,11 +292,11 @@ The artifact package is valid when:
 
 **`HARNESS.md`**: valid when it is project-agnostic, defines the governing instrument and deployment model, defines collaboration behavior and editing discipline, and does not contain project-specific details.
 
-**`.harness/01_PROJECT.md`**: valid when it states current phase, identifies active work and open decisions, contains a promotion queue and recent trail, identifies the next recommended action, and does not duplicate the PRD or Build Spec.
+**`.harness/01_PROJECT.md`**: valid when it states current phase, identifies active work and open decisions, contains a promotion queue and recent trail, identifies the next recommended action, and does not duplicate content owned by other cartridge files.
 
-**`.harness/02_PRD.md`**: valid when it defines product purpose and governing instrument framing, target users, problems and needs, MVP scope and non-goals, and avoids detailed build mechanics.
+**`.harness/README.md`**: valid when it lists every file in the cartridge with a one-line description of what each holds, and is current with the actual directory contents.
 
-**`.harness/03_BUILD.md`**: valid when it defines the file map with deployment topology, artifact contracts, lifecycle mechanics, update mechanics, editing discipline, optional artifact policy, migration mechanics, and acceptance gates — and avoids product strategy and current-state trail.
+**Additional cartridge files**: valid when each has a Document Governance section defining what it owns and what it defers.
 
 ---
 
@@ -299,17 +306,16 @@ A restart-safe project must allow a future AI session or collaborator to resume 
 
 ## 15.1 Resume sequence
 
-1. read `HARNESS.md`
-2. read `.harness/01_PROJECT.md`
-3. identify current phase and active work
-4. read relevant `.harness/02_PRD.md` sections
-5. read relevant `.harness/03_BUILD.md` sections
-6. inspect open decisions, promotion queue, and do-not-resurrect notes
-7. proceed with the smallest safe next action
+1. Read `HARNESS.md`
+2. Read `.harness/01_PROJECT.md` — identify current phase, active work, and next action
+3. Read `.harness/README.md` — understand the full cartridge shape and what else to load
+4. Read additional cartridge files relevant to the current task
+5. Inspect open decisions, promotion queue, and do-not-resurrect notes
+6. Proceed with the smallest safe next action
 
 ## 15.2 Restart failure modes
 
-The artifact package is not restart-safe if: current phase is unclear, artifact names conflict, PRD and Build disagree silently, active decisions exist only in chat, `.harness/01_PROJECT.md` is stale, legacy artifacts remain ambiguous, or the next action cannot be inferred.
+The cartridge is not restart-safe if: current phase is unclear, `01_PROJECT.md` is stale, `README.md` is missing or out of date, active decisions exist only in chat, legacy artifacts remain ambiguous, or the next action cannot be inferred.
 
 ---
 
@@ -366,21 +372,21 @@ Before editing an artifact, confirm the scope is clear. After editing, confirm:
 - old artifacts are not left ambiguously authoritative
 - next action remains clear
 
-Before declaring the package stable, confirm:
+Before declaring the cartridge stable, confirm:
 
-- all four canonical files exist at correct locations
-- artifact roles, authority model, and current state are consistent
+- `01_PROJECT.md` and `README.md` exist and are current
+- all cartridge files have clear roles and Document Governance sections
 - open decisions are tracked and promotion queue is current
-- no legacy artifact remains required for normal operation
+- no legacy artifact remains ambiguously authoritative
 
 ---
 
 # 19. Acceptance Gates
 
-The artifact package is stable when:
+The cartridge is stable when:
 
-- all four canonical files exist at correct locations with stable names
-- each artifact has a clear role, local governance, and no material overlap with others
+- `01_PROJECT.md` and `README.md` exist, are current, and accurately reflect the project
+- each cartridge file has a clear role, local governance, and no material overlap with others
 - edits are precise and do not silently remove durable decisions
 - stable decisions are promoted and post-promotion pruning is done
 - meaningful changes are captured in `.harness/01_PROJECT.md` or a justified changelog
@@ -429,13 +435,8 @@ For build mechanics, this file has authority over `.harness/01_PROJECT.md` and `
 
 # 22. Final Summary
 
-The Harness is a governing instrument built as a markdown artifact package. When applied to a host project, it deposits a `.harness/` knowledge cartridge with the three project-specific artifacts, with `HARNESS.md` at the project root as the governing protocol.
+The Harness is a governing instrument built as a markdown artifact package. When applied to a host project, it deposits a `.harness/` knowledge cartridge at the project root, with `HARNESS.md` as the governing protocol.
 
-The canonical files are:
+The cartridge always contains `01_PROJECT.md` as its session anchor and `README.md` as its index. Everything else is composed by the operator from available templates or created as the project requires.
 
-- `HARNESS.md` (project root)
-- `.harness/01_PROJECT.md`
-- `.harness/02_PRD.md`
-- `.harness/03_BUILD.md`
-
-This Build Specification defines how the package is structured, validated, maintained, migrated, extended, and stabilized. The system is stable only when artifacts are role-clear, locally governed, cross-consistent, restart-safe, and free of ambiguously authoritative legacy files.
+This Build Specification defines how the cartridge is structured, validated, maintained, migrated, extended, and stabilized. The system is stable only when artifacts are role-clear, locally governed, cross-consistent, restart-safe, and free of ambiguously authoritative legacy files.

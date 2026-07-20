@@ -9,9 +9,9 @@ $n = if (Test-Path $counterFile) {
 }
 
 if ($n -ge $threshold) {
-    Write-Host ''
-    Write-Host 'Harness: anything worth capturing from recent turns? Run /self-improve to log friction, feedback, or a success.' -ForegroundColor Cyan
-    Write-Host ''
+    $reminderFile = Join-Path (Split-Path $counterFile) 'capture-reminder.md'
+    $message = if (Test-Path $reminderFile) { (Get-Content $reminderFile -Raw).Trim() } else { "Harness: run /self-improve to log friction, feedback, or a success." }
+    @{ hookSpecificOutput = @{ additionalContext = $message } } | ConvertTo-Json -Compress
     Set-Content $counterFile 0
 } else {
     Set-Content $counterFile $n

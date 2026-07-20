@@ -3,8 +3,8 @@ Read `HARNESS.md` in full — this is the governing protocol. Internalize it as 
 Check whether a `.harness/` directory exists in the current working project:
 
 **If `.harness/` exists:**
-- Read `.harness/01_PROJECT.md`
-- Identify current phase, active work, open decisions, and next recommended action
+- Read `.harness/01_PROJECT.md` — identify current phase, active work, open decisions, and next recommended action
+- If `.harness/README.md` exists, read it — understand the full cartridge shape and what other files are present
 
 **If `.harness/` does not exist:**
 - Note that this project is not yet governed

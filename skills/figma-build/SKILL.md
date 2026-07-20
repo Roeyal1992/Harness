@@ -97,3 +97,18 @@ Covers:
 - Repurpose workflow: `createInstance() → detachInstance() → strip → modify`
 - Operator-placed-node rule: a user-placed component is read-only — always derive the working copy from `sourceComp.createInstance()`
 - Content structure principles: narrative ordering, unified pockets, section label patterns, badge placement
+
+---
+
+## 6. Plugin API vs MCP Boundary
+
+These are two distinct execution layers. Confusing them produces silent failures or TypeErrors.
+
+| Layer | Where it runs | What belongs here |
+|---|---|---|
+| **Plugin API** | Inside the Figma sandbox (`use_figma` script) | Anything on the `figma` global: `figma.createFrame()`, `figma.loadFontAsync()`, `figma.currentPage`, `node.appendChild()`, etc. |
+| **MCP tools** | At the orchestration layer (outside the script) | `get_screenshot`, `get_design_context`, `get_metadata`, `get_figma_skill` — called as separate tool calls, never from inside a `use_figma` script |
+
+**The rule:** if it's on the `figma` global, it's Plugin API — write it inside the script. If it's a tool call, it's MCP — call it after the script completes.
+
+Common mistake: calling `figma.getScreenshot()` at the end of a `use_figma` script. There is no such method. The correct sequence is: script ends → call `get_screenshot` as a separate MCP tool call.

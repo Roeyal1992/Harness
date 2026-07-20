@@ -5,9 +5,18 @@ The improvement pipeline itself — this command, the entry format, the capture 
 
 ---
 
-## Step 1 — Get the occurrence
+## Step 1 — Derive the occurrence from conversation context
 
-Ask the operator to describe what just happened in 1–2 sentences. This is the raw event — the specific thing that triggered the capture.
+Scan back through the current session for capture signals before asking the operator anything. Look for:
+
+- **Corrections** — operator said "no", "not that", "stop doing X", or rewrote something you produced
+- **Redirections** — operator had to re-explain scope, ask the same thing a second way, or add constraints mid-task
+- **Friction** — multiple back-and-forth turns on something that should have been one shot
+- **Approval signals** — operator said "perfect", "exactly", "that's it", or accepted an unusual choice without pushback
+
+Surface what you found in 1–2 sentences per signal: *"I noticed you corrected X in turn N — is that worth capturing?"* If you found nothing, say so and ask the operator if anything felt worth logging.
+
+The operator's role here is to confirm, redirect, or add nuance — not to provide the raw event cold.
 
 ---
 

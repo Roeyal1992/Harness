@@ -57,7 +57,7 @@ Active projects governed by the Harness. This map is the authoritative list — 
 
 | Format | File | Status |
 |---|---|---|
-| Layered Deck | `formats/layered-deck.md` | Active |
+| Strategic Deck | `formats/strategic-deck/FORMAT.md` | Active — v1.9, renamed + numbered layers |
 | Product Design | `formats/product-design.md` | Active |
 
 ## Poalim Engagement
@@ -78,6 +78,17 @@ Active projects governed by the Harness. This map is the authoritative list — 
 | L3 — Mortgages / Manual pre-approval | `Poalim/Domains/Mortrages/manual-pre-approval/PRD.md` | Active |
 | L3 — Mortgages / Manual pre-approval | `Poalim/Domains/Mortrages/manual-pre-approval/wireframes/banker-pre-approval-workspace-v2.html` | Active |
 | Reference — Mortgages | `Poalim/Domains/Mortrages/regulatory-baskets-reference.md` | Active |
+
+## Masa Engagement
+
+| Layer | Artifact | Status |
+|---|---|---|
+| Cartridge | `Masa/proposal_deck/.harness/01_PROJECT.md` | Active — initialized 2026-07-19 |
+| Cartridge | `Masa/proposal_deck/.harness/02_INTENT.md` | Active |
+| Cartridge | `Masa/proposal_deck/.harness/03_LAYERS.md` | Active |
+| L1 — Brief | `Masa/proposal_deck/MASA_Brief.md` | v1.0 — drafted, pending operator review |
+| L3 — Design Conventions | `Masa/proposal_deck/MASA_Design.md` | v1.0 — complete, extracted from Figma 2026-07-19 |
+| Source input | `Masa/proposal_deck/resources/slide_summary.md` | Complete |
 
 ## Isracard Engagement
 
@@ -205,6 +216,10 @@ All paste-it-in remnants removed across all files and `skills/prune.md`.
 ## 2026-07-12 — Skills registry audit: 11 unregistered skills surfaced and registered
 
 Discovered that `HARNESS.md` skills table and `01_PROJECT.md` were significantly out of date — 11 skills existed on disk but were not registered anywhere: gather, new-component, render-html, preview-server, figjam, figma-roundtrip, ux-expert, skill-creator, transcript-ingestion, deloitte-pptx, deloitte-pptx-node. All registered in `HARNESS.md` skills table and `01_PROJECT.md`. Root cause: no enforcement mechanism ensures that skill creation (a write to `skills/`) is always paired with a registration write.
+
+## 2026-07-20 — Self-improvement pipeline overhauled
+
+Four changes: (1) `turn-counter.ps1` switched from terminal stdout to `hookSpecificOutput.additionalContext` — the reminder is now injected into the AI's context, not just displayed in the terminal. (2) Reminder message extracted to `.claude/hooks/capture-reminder.md` so it can be tuned without touching the script. (3) `/self-improve` Step 1 rewritten — AI now scans conversation context for capture signals (corrections, redirections, friction, approval) before asking the operator anything; operator role shifts from reporter to validator. (4) `05_IMPROVE.md` restructured: archive section removed (the changed artifact + trail entry is the record), file reduced to active backlog only. IMP-004 (plugin API/MCP boundary) and IMP-008 (backlog edit duplication) promoted — fixes applied to `figma-build/SKILL.md` and `05_IMPROVE.md` respectively. IMP-009 (operator-placed component rule) confirmed already resolved in `figma-build/references/component-selection.md`. IMP-010 remains open pending live test of `additionalContext` injection.
 
 ## 2026-07-14 — Self-improvement pipeline built
 

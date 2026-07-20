@@ -46,7 +46,7 @@ Formats instantiate the universal governance model for specific deliverable type
 
 | Format | File | Use for |
 |---|---|---|
-| Layered Deck | `formats/layered-deck.md` | Decks, reports, proposals, frameworks |
+| Strategic Deck | `formats/strategic-deck/FORMAT.md` | Decks, reports, proposals, frameworks |
 | Product Design | `formats/product-design.md` | HTML mockups, wireframes, Figma-ready screens |
 
 ### References

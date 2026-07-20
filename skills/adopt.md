@@ -68,18 +68,20 @@ The interview surfaces what is not written anywhere. Work through the topics bel
 
 ### Phase 3 — Initialize
 
-1. Identify the deliverable format — ask the operator which format applies (e.g., `product-mockup`, `layered-deck`) and load the relevant file from `formats/`. If the scan already makes the format obvious, name it and confirm rather than asking. Record the chosen format in `01_PROJECT.md`.
+1. Identify the deliverable format — ask the operator which format applies (e.g., `product-mockup`, `strategic-deck`) and load the relevant file from `formats/`. If the scan already makes the format obvious, name it and confirm rather than asking. Record the chosen format in `01_PROJECT.md`.
 2. Populate `.harness/01_PROJECT.md` with:
    - current phase and active work, based on what was confirmed
    - active format name
    - open decisions — especially assumptions surfaced during the interview that have not yet been validated
    - do-not-resurrect notes for any decisions the designer closed definitively
    - mark the adoption in the trail: date, what was scanned, what was confirmed vs. assumed
-3. Populate `02_*` and `03_*` per the **Cartridge Structure** section of the active format file — use the exact filenames, roles, and sections described there:
-   - mark any section derived from inference rather than confirmed designer intent as `(unconfirmed — see 01_PROJECT.md)`
-   - stub out unknown sections explicitly rather than leaving them blank
-4. The `.harness/` cartridge is the only governance artifact that belongs in the project. Do not place or copy `HARNESS.md` here — it lives exclusively in the Harness repo
-5. Run `skills/assess.md` as a post-adoption health check before declaring the package initialized
+3. Compose the rest of the cartridge using the composition principle — add a file when it reduces complexity more than it adds maintenance overhead:
+   - Use the templates in `skills/deploy.md` as starting points: `product.md`, `project.md`, `build.md`, `protocol.md`
+   - Mark any section derived from inference rather than confirmed designer intent as `(unconfirmed — see 01_PROJECT.md)`
+   - Stub out unknown sections explicitly rather than leaving them blank
+4. Create `README.md` in `.harness/` — one line per file in the cartridge, describing what it holds and why it exists
+5. The `.harness/` cartridge is the only governance artifact that belongs in the project. Do not place or copy `HARNESS.md` here — it lives exclusively in the Harness repo
+6. Run `skills/assess.md` as a post-adoption health check before declaring the package initialized
 
 ---
 
