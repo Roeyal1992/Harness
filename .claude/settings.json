@@ -39,8 +39,6 @@
       "PowerShell(claude mcp --help 2>&1)",
       "PowerShell($env:Path = \"$env:LOCALAPPDATA\\\\node;$env:Path\"; npx @anthropic-ai/claude-code mcp --help 2>&1 | Select-Object -First 30)",
       "PowerShell($env:Path = \"$env:LOCALAPPDATA\\\\node;$env:Path\"; npx @anthropic-ai/claude-code mcp add --help 2>&1 | Select-Object -First 30)",
-      "PowerShell($env:Path = \"$env:LOCALAPPDATA\\\\node;$env:Path\"; npx @anthropic-ai/claude-code mcp add figma -s user -e \"FIGMA_API_KEY=figd_eRj9fKEACHNxahgcRPRr-FKRRpamsQeDhICJ0nT\" -- npx -y @figma/figma-developer-mcp --stdio 2>&1)",
-      "PowerShell($env:Path = \"$env:LOCALAPPDATA\\\\node;$env:Path\"; npx @anthropic-ai/claude-code mcp remove figma -s user 2>&1; npx @anthropic-ai/claude-code mcp add figma -s user -e \"FIGMA_API_KEY=figd_eRj9fKEACHNxahgcRPRr-FKRRpamsQeDhICJ0nT\" -- npx -y @figma/figma-developer-mcp --stdio 2>&1)",
       "Skill(artifact-design)",
       "Skill(artifact-design:*)",
       "mcp__claude_ai_Figma__get_design_context",
